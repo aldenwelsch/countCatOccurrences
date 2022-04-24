@@ -8,7 +8,7 @@ TARGET = CountCatOccurrences
 INCLUDE_DIR = publicHeaders
 SOURCE_DIR = source
 INCLUDES = $(INCLUDE_DIR)/*.hpp
-SOURCES = $(SOURCE_DIR)/patternFinder.cpp $(SOURCE_DIR)/fileHandler.cpp
+SOURCES = $(SOURCE_DIR)/substringFinder.cpp $(SOURCE_DIR)/substringCounter.cpp $(SOURCE_DIR)/fileHandler.cpp $(SOURCE_DIR)/optionsHandler.cpp
 MAIN = $(SOURCE_DIR)/main.cpp
 OBJECTS = $(SOURCES:.cpp=.o) $(MAIN:.cpp=.o) 
 

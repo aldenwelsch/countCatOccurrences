@@ -12,10 +12,10 @@ Homework problem for Overwatch
 ### Building for Linux:
 Running on Windows
 - Windows Subsystem for Linux 2 (WSL) installed
-- GCC installed in WSL
+- GCC/G++ installed in WSL
 
 Running on Linux 
-- GCC installed
+- GCC/G++ installed
 
 ### Building for Windows:
 - Visual Studio X installed
