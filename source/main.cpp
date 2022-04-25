@@ -1,15 +1,43 @@
+#include <string>
+#include <signal.h>
 #include "substringCounter.hpp"
 #include "optionsHandler.hpp"
 #include "fileHandler.hpp"
 
+// Handle keyboard interrupts for continuous mode
+volatile sig_atomic_t userInterruptFlag = 0;
+void checkForUserInterrupt(int sig)
+{
+    userInterruptFlag = 1;
+}
+
+void countOccurrences(std::string &inputString, std::string &substring, OptionsHandler &options, FileHandler &fileHandler)
+{
+    SubstringCounter counter = SubstringCounter(inputString, substring);
+
+    if (counter.findSubstringInString())
+    {
+        // Prompt ambiguous on what "output" number of occurrences means, so just 
+        // sending the number to stdout.
+        std::cout << counter.getNumberOfOccurrences() << std::endl;
+
+        // Output the number of occurrences to file if specified
+        if (options.isOutputToFile())
+        {
+            fileHandler.outputResultToFile(std::to_string(counter.getNumberOfOccurrences()));
+        }
+    }
+}
+
 int main(int argc, char** argv)
 {
-    helloWorld();
+    signal(SIGINT, checkForUserInterrupt);
 
+    // Create an OptionsHandler instance on the "stack" (automatic memory)
     OptionsHandler options = OptionsHandler(argc, argv);
 
-    // TODO: Add fileHandler instance
-
+    // Add fileHandler instance
+    FileHandler fileHandler = FileHandler(options.getInputFilepath(), options.getOutputFilepath());
 
     // Identify the input string and substring
     std::string inputString = "";
@@ -25,12 +53,45 @@ int main(int argc, char** argv)
     if (options.getInputMode() == InputMode::console)
     {
         inputString = options.getInputString();
+        
+        // Count the occurrences in this string
+        countOccurrences(inputString, substring, options, fileHandler);
     }
+    else if (options.getInputMode() == InputMode::file)
+    {
+        inputString = fileHandler.readInputFile(options.isCaseInsensitive(), options.isWhitespaceIgnored());
 
+        // Count the occurrences in this string
+        countOccurrences(inputString, substring, options, fileHandler);
+    }
+    else if (options.getInputMode() == InputMode::continuous)
+    {
+        // Repeatedly prompt the user until exiting for an input
+        while(true)
+        {
+            // Check if user prompts exit
+            if (userInterruptFlag == false)
+            {
+                // Prompt user and get their input
+                std::cout << "Enter text to search for substring (\"q\" to quit):" << std::endl << "> ";
+                std::cin >> inputString;
 
-    SubstringCounter counter = SubstringCounter(inputString, substring);
+                // Check if user prompts exit
+                if (inputString.compare("q") == 0)
+                {
+                    userInterruptFlag = true;
+                }
+            }
+            else
+            {
+                std::cout << "User-caused exit." << std::endl;
+                return 0;
+            }
 
-
+            // Count the occurrences in this string
+            countOccurrences(inputString, substring, options, fileHandler);
+        }
+    }
 
     return 0;
 }

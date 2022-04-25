@@ -1,12 +1,13 @@
+#include <string>
 #include "substringCounter.hpp"
 
 SubstringCounter::SubstringCounter(std::string inputString, std::string substring) : SubstringFinder(inputString, substring)
 {
-    countOccurrencesInString();
-    numberOfOccurrences = 0;
+    m_numberOfOccurrences = 0;
 }
 
-void SubstringCounter::countOccurrencesInString()
+void SubstringCounter::storeFoundOccurrence(unsigned long index)
 {
-    numberOfOccurrences = occurences.size();
+    // Don't need to use the argument, just increment the counter
+    m_numberOfOccurrences++;
 }

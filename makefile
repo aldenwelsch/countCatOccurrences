@@ -14,7 +14,7 @@ OBJECTS = $(SOURCES:.cpp=.o) $(MAIN:.cpp=.o)
 
 # If using Linux, use GCC as compiler
 CC = g++
-CFLAGS = -Wall -g -I$(INCLUDE_DIR) -std=c++2a # or -std=c++20 if using later than GCC v9
+CFLAGS = -Wall -g -I$(INCLUDE_DIR) -std=c++2a # or -std=c++20 if using later than GCC v9. Could use an older std of c++ if developing on legacy/less-supported platforms
 
 # Build and clean the object files
 all: $(TARGET) clean
