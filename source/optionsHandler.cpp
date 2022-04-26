@@ -47,7 +47,7 @@ bool OptionsHandler::parseOptions()
         {
             m_inputMode = InputMode::file;
 
-            // Check the next positional argument for valid filepath
+            // Check the next positional argument for filepath
             if (storeArgListFilepath(2, m_inputFilepath) == false)
             {
                 return false;
@@ -64,7 +64,6 @@ bool OptionsHandler::parseOptions()
             if (m_argCount >= 3)
             {
                 m_inputString = m_argList[2];
-                std::cout << "input string: " << m_inputString << std::endl;
             }
             
             // Get remaining argument flags
@@ -113,7 +112,6 @@ void OptionsHandler::parseOptionalFlags(int index)
             m_outputToFile = true;
             if (storeArgListFilepath(i + 1, m_outputFilepath) == false)
             {
-                
                 return;
             }
             // skip the next item since that was stored as filepath

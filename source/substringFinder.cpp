@@ -20,11 +20,19 @@ void SubstringFinder::setNewInputString(std::string inputString)
 
 void SubstringFinder::storeFoundOccurrence(unsigned long index)
 {
-    occurrences.push_back(index);
+    m_occurrences.push_back(index);
+}
+
+void SubstringFinder::resetOccurrences()
+{
+    m_occurrences.clear();
 }
 
 bool SubstringFinder::findSubstringInString()
 {
+    // Reset occurrences in case this isn't the first time this function has been called
+    resetOccurrences();
+
     // Assume we don't find any matches
     bool matchFound = false;
 
@@ -32,6 +40,8 @@ bool SubstringFinder::findSubstringInString()
     unsigned long inputStringLength = m_inputString.length();
     unsigned long substringLength = m_substring.length();
     std::vector<unsigned long> longestPrefixArray(substringLength);
+
+
 
     // Build the Lps array
     buildLongestPrefixArray(m_substring, longestPrefixArray);

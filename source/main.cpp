@@ -3,6 +3,7 @@
 #include "substringCounter.hpp"
 #include "optionsHandler.hpp"
 #include "fileHandler.hpp"
+#include "stringHelpers.hpp"
 
 // Handle keyboard interrupts for continuous mode
 volatile sig_atomic_t userInterruptFlag = 0;
@@ -27,6 +28,10 @@ void countOccurrences(std::string &inputString, std::string &substring, OptionsH
             fileHandler.outputResultToFile(std::to_string(counter.getNumberOfOccurrences()));
         }
     }
+    else
+    {
+        std::cout << 0 << std::endl;
+    }
 }
 
 int main(int argc, char** argv)
@@ -47,19 +52,26 @@ int main(int argc, char** argv)
     if (options.isNewSubstring())
     {
         substring = options.getSubstring();
+        stringFormatter(substring, options.isCaseInsensitive(), options.isWhitespaceIgnored());
     }
 
     // If in console mode, we get the input string directly from the options
     if (options.getInputMode() == InputMode::console)
     {
         inputString = options.getInputString();
+
+        // Format strings according to options
+        stringFormatter(inputString, options.isCaseInsensitive(), options.isWhitespaceIgnored());
         
         // Count the occurrences in this string
         countOccurrences(inputString, substring, options, fileHandler);
     }
     else if (options.getInputMode() == InputMode::file)
     {
-        inputString = fileHandler.readInputFile(options.isCaseInsensitive(), options.isWhitespaceIgnored());
+        inputString = fileHandler.readInputFile();
+        
+        // Format string according to options
+        stringFormatter(inputString, options.isCaseInsensitive(), options.isWhitespaceIgnored());
 
         // Count the occurrences in this string
         countOccurrences(inputString, substring, options, fileHandler);
@@ -74,7 +86,8 @@ int main(int argc, char** argv)
             {
                 // Prompt user and get their input
                 std::cout << "Enter text to search for substring (\"q\" to quit):" << std::endl << "> ";
-                std::cin >> inputString;
+                //std::cin >> inputString;
+                std::getline(std::cin, inputString);
 
                 // Check if user prompts exit
                 if (inputString.compare("q") == 0)
@@ -87,6 +100,9 @@ int main(int argc, char** argv)
                 std::cout << "User-caused exit." << std::endl;
                 return 0;
             }
+
+            // Format string according to options
+            stringFormatter(inputString, options.isCaseInsensitive(), options.isWhitespaceIgnored());
 
             // Count the occurrences in this string
             countOccurrences(inputString, substring, options, fileHandler);

@@ -65,11 +65,11 @@ class SubstringFinder
          * @param index The index in the input string that matches the start of the substring (the found occurrence)
          */
         virtual void storeFoundOccurrence(unsigned long index);
-
+        virtual void resetOccurrences();
 
         void buildLongestPrefixArray(std::string substring, std::vector<unsigned long> &longestPrefixArray);
     
     protected:
-        std::vector<unsigned long> occurrences;
+        std::vector<unsigned long> m_occurrences;
         
 };

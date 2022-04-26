@@ -11,3 +11,8 @@ void SubstringCounter::storeFoundOccurrence(unsigned long index)
     // Don't need to use the argument, just increment the counter
     m_numberOfOccurrences++;
 }
+
+void SubstringCounter::resetOccurrences()
+{
+    m_numberOfOccurrences = 0;
+}

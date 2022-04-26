@@ -32,4 +32,5 @@ class SubstringCounter : public SubstringFinder
          *  instead have space complexity of just the stored value of the occurrence counter, O(1).
          */
         void storeFoundOccurrence(unsigned long index);
+        void resetOccurrences();
 };

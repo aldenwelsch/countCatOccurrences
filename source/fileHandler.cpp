@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 #include "fileHandler.hpp"
 
 FileHandler::FileHandler(std::string inputFilepath, std::string outputFilepath)
@@ -11,7 +10,7 @@ FileHandler::FileHandler(std::string inputFilepath, std::string outputFilepath)
     m_outputFile = outputFilepath;
 }
 
-std::string FileHandler::readInputFile(bool isCaseInsensitive, bool isWhitespaceIgnored)
+std::string FileHandler::readInputFile()
 {
     std::string fileString = "";
 
@@ -36,9 +35,6 @@ std::string FileHandler::readInputFile(bool isCaseInsensitive, bool isWhitespace
         exit(1);
     }
 
-    // Format string according to options
-    stringFormatter(fileString, isCaseInsensitive, isWhitespaceIgnored);
-
     return fileString;
 }
 
@@ -60,28 +56,4 @@ void FileHandler::outputResultToFile(std::string text)
         std::cout << "Could not open output file: " << m_outputFile << ". Exiting with error 1" << std::endl;
         exit(1);
     }
-}
-
-void FileHandler::stringFormatter(std::string &text, bool isCaseInsensitive, bool isWhitespaceIgnored)
-{
-    // Convert characters to lowercase
-    if (isCaseInsensitive)
-    {
-        std::transform(text.begin(), text.end(), text.begin(), 
-        [](unsigned char c)
-        {  
-            return std::tolower(c);
-        });
-    }
-    if (isWhitespaceIgnored)
-    {
-        // Remove whitespace      
-        text.erase(std::remove_if(text.begin(), text.end(), isSpace), text.end());
-    }
-
-    std::cout << "New text: " << text << std::endl;
-}
-
-bool isSpace(unsigned char c) {
-    return (c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\v' || c == '\f');
 }

@@ -19,12 +19,15 @@ Homework problem for Overwatch
 
 ## Build Dependencies:
 ### Building for Linux:
-Running on Windows
-- Windows Subsystem for Linux 2 (WSL) installed
-- GCC/G++ installed in WSL
 
-Running on Linux 
 - GCC/G++ installed
+- Google Test installed
+    - Assuming installed at /usr/src/gtest/
+- pthread installed
+
+#### Building for Linux on Windows
+- Windows Subsystem for Linux 2 (WSL) installed
+    - Verify same dependencies are installed
 
 
 ## Installation
@@ -33,11 +36,12 @@ Download or clone repository from https://github.com/aldenwelsch/countCatOccuren
 
 1. If downloaded from a compressed archive, extract to desired directory
 2. Use a console application to open the archive.
-3. At the root directory of the repository, run `make`
+3. At the root directory of the repository, run `make` to build the application
 
 
 ## Tests
-
+Google Test is used to run unit tests on functions of this application. These are run during build time
+when `make` is called. See /test/testCountCatOccurrences.cpp for list of unit tests.
 
 ## How-to-use
 
