@@ -16,21 +16,15 @@ void countOccurrences(std::string &inputString, std::string &substring, OptionsH
 {
     SubstringCounter counter = SubstringCounter(inputString, substring);
 
-    if (counter.findSubstringInString())
-    {
-        // Prompt ambiguous on what "output" number of occurrences means, so just 
-        // sending the number to stdout.
-        std::cout << counter.getNumberOfOccurrences() << std::endl;
+    counter.findSubstringInString();
+    // Prompt ambiguous on what "output" number of occurrences means, so just 
+    // sending the number to stdout.
+    std::cout << counter.getNumberOfOccurrences() << std::endl;
 
-        // Output the number of occurrences to file if specified
-        if (options.isOutputToFile())
-        {
-            fileHandler.outputResultToFile(std::to_string(counter.getNumberOfOccurrences()));
-        }
-    }
-    else
+    // Output the number of occurrences to file if specified
+    if (options.isOutputToFile())
     {
-        std::cout << 0 << std::endl;
+        fileHandler.outputResultToFile(std::to_string(counter.getNumberOfOccurrences()));
     }
 }
 
@@ -97,7 +91,7 @@ int main(int argc, char** argv)
             }
             else
             {
-                std::cout << "User-caused exit." << std::endl;
+                std::cout << "User-prompted exit." << std::endl;
                 return 0;
             }
 

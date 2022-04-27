@@ -135,7 +135,6 @@ void OptionsHandler::parseOptionalFlags(int index)
 
 void OptionsHandler::displayMenu()
 {
-    // TODO: output help menu
     std::string menuString = R"(
 CountCatOccurrences <input mode> [flags]
 

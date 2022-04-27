@@ -10,11 +10,23 @@ Homework problem for Overwatch
 
 
 ## Assumptions:
-- Linux-only, No Windows, Mac support
+- Prompt ambiguous on desired platform
+    - Build files assume Linux-only, No Windows, Mac support
     - Can add support by implementing checks in the makefile and adding support for the desired compiler
-- Prompt was ambiguous on maximum size of input string, so assuming 32-bit unsigned long max sizeW
+- Prompt was ambiguous on maximum size of input string, so assuming 32-bit unsigned long max size
     - Running on 32-bit (use of unsigned long vs. unsigned long long in the substringFinder and substringCounter classes)
     - If 64-bit needed, implementation would need to use unsigned long long and compiler check machine support
+- "Console input" by the prompt could mean a few things:
+    - stdin, console arguments, prompted user inputs during application runtime (i.e. std::cin)
+    - This application takes in console arguments in "console" mode and prompted user inputs during runtime in "continuous" mode
+- ASCII vs. unicode text was not specified, assuming input could be either
+- Prompt does not specify how to present the results
+    - Application handles printing to stdout (default) and to file if specified
+- Ambiguity around the literal-string for the word "cat". 
+    - Application handles case-insensitive or sensitive text matching
+    - Application handles whitespace-ignored or whitespace-included text matching
+- Prompt does not specify how the application will be used, or need of extensibility for future use
+    - Pattern matching is common so application provides an option for general substring matching beyond the specific "cat" string
 
 
 ## Build Dependencies:
