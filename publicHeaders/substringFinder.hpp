@@ -1,3 +1,6 @@
+#ifndef SUBSTRINGFINDER_H
+#define SUBSTRINGFINDER_H
+
 #include <string>
 #include <vector>
 
@@ -37,7 +40,18 @@ class SubstringFinder
     public:
         SubstringFinder(std::string inputString, std::string substring);
 
+        /**
+         * @brief Set the New Substring object
+         * 
+         * @param substring The substring to set
+         */
         void setNewSubstring(std::string substring);
+
+        /**
+         * @brief Set the New Input String object
+         * 
+         * @param inputString The input string to set
+         */
         void setNewInputString(std::string inputString);
 
         /**
@@ -65,11 +79,29 @@ class SubstringFinder
          * @param index The index in the input string that matches the start of the substring (the found occurrence)
          */
         virtual void storeFoundOccurrence(unsigned long index);
+
+        /**
+         * @brief resetOccurrences
+         *  Empties the member variable containing occurrences
+         * 
+         */
         virtual void resetOccurrences();
 
+        /**
+         * @brief buildLongestPrefixArray
+         *  A helper function for the findSubstringInString function that creates a new array that stores the 
+         *  length of the longest prefix of the substring that matches up to the character of the string at 
+         *  each index in the substring. Used by the substring finder algorithm to allow the substring to be 
+         *  "pre-searched" so that only one pass through the input string is needed.
+         * 
+         * @param substring The substring for which to create the pre-searched prefix array
+         * @param longestPrefixArray The vector in which to store prefix array that will be created
+         */
         void buildLongestPrefixArray(std::string substring, std::vector<unsigned long> &longestPrefixArray);
     
     protected:
         std::vector<unsigned long> m_occurrences;
         
 };
+
+#endif

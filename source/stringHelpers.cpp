@@ -20,7 +20,7 @@ void stringFormatter(std::string &text, bool isCaseInsensitive, bool isWhitespac
     }
 }
 
-bool isSpace(unsigned char c)
+bool isSpace(unsigned char character)
 {
-    return (c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\v' || c == '\f');
+    return (character == ' ' || character == '\n' || character == '\r' || character == '\t' || character == '\v' || character == '\f');
 }

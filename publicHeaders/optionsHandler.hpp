@@ -1,3 +1,6 @@
+#ifndef OPTIONSHANDLER_H
+#define OPTIONSHANDLER_H
+
 #include <iostream>
 #include <string>
 
@@ -28,15 +31,75 @@ class OptionsHandler
     public:
         OptionsHandler(int argc, char** argv);
 
+        /**
+         * @brief isCaseInsensitive
+         *  Gets the boolean of whether the class has been set to be caseInsensitive
+         * 
+         * @return true if case insensitive
+         * @return false otherwise
+         */
         bool isCaseInsensitive() { return m_caseInsensitive; };
+
+        /**
+         * @brief isWhitespaceIgnored
+         *  Gets the boolean of whether the class has been set to have whitespace ignored
+         * 
+         * @return true if whitespace is to be ignored
+         * @return false otherwise
+         */
         bool isWhitespaceIgnored() { return m_whitespaceIgnored; };
+
+        /**
+         * @brief isOutputToFile
+         *  Gets the boolean of whether the class will output the result to file or not
+         * 
+         * @return true if output to file is set
+         * @return false otherwise
+         */
         bool isOutputToFile() { return m_outputToFile; };
+
+        /**
+         * @brief isNewSubstring
+         *  Gets the boolean of whether the class will use a different substring than "cat", user-specified
+         * 
+         * @return true if a different substring is to be used
+         * @return false otherwise
+         */
         bool isNewSubstring() { return m_newSubstring; };
 
+        /**
+         * @brief Get the Input Filepath object
+         * 
+         * @return std::string the filepath
+         */
         std::string getInputFilepath() { return m_inputFilepath; };
+
+        /**
+         * @brief Get the Output Filepath object
+         * 
+         * @return std::string The filepath
+         */
         std::string getOutputFilepath() { return m_outputFilepath; };
+
+        /**
+         * @brief Get the Substring object
+         * 
+         * @return std::string The new substring
+         */
         std::string getSubstring() { return m_substring; };
+
+        /**
+         * @brief Get the Input String object
+         * 
+         * @return std::string the specified input string
+         */
         std::string getInputString() {return m_inputString; };
+
+        /**
+         * @brief Get the Input Mode object
+         * 
+         * @return InputMode The stored input mode
+         */
         InputMode getInputMode() { return m_inputMode; };
 
         /**
@@ -94,3 +157,5 @@ class OptionsHandler
          */
         bool storeArgListFilepath(int index, std::string &filepath);
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef SUBSTRINGCOUNTER_H
+#define SUBSTRINGCOUNTER_H
+
 #include "substringFinder.hpp"
 
 /**
@@ -15,6 +18,11 @@ class SubstringCounter : public SubstringFinder
     public:
         SubstringCounter(std::string inputString, std::string substring);
         
+        /**
+         * @brief Get the Number Of Occurrences object
+         * 
+         * @return unsigned long The number of occurrences of the substringCounter
+         */
         unsigned long getNumberOfOccurrences() { return m_numberOfOccurrences; };
     
     private:
@@ -32,5 +40,13 @@ class SubstringCounter : public SubstringFinder
          *  instead have space complexity of just the stored value of the occurrence counter, O(1).
          */
         void storeFoundOccurrence(unsigned long index);
+
+        /**
+         * @brief resetOccurrences
+         *  Empties the member variable containing occurrences
+         * 
+         */
         void resetOccurrences();
 };
+
+#endif

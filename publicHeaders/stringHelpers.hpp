@@ -1,3 +1,6 @@
+#ifndef STRINGHELPERS_H
+#define STRINGHELPERS_H
+
 #include <string>
 
 /**
@@ -15,8 +18,10 @@ void stringFormatter(std::string &text, bool isCaseInsensitive = false, bool isW
  * @brief isSpace
  *  A helper function specifying if a character is whitespace (including endline characters)
  * 
- * @param c the character to check
+ * @param character the character to check
  * @return true if the character is whitespace
  * @return false otherwise
  */
-bool isSpace(unsigned char c);
+bool isSpace(unsigned char character);
+
+#endif
